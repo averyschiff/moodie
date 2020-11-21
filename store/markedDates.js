@@ -7,7 +7,7 @@ export const addDay = (day, color) => ({
 })
 
 /* init state */
-initDates = {}
+const initDates = {}
 
 export default function(state=initDates, action){
   switch (action.type){
