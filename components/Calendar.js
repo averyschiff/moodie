@@ -15,7 +15,7 @@ export class MyCalendar extends React.Component{
       <View>
         <Text>More sample text!</Text>
         {this.props.selectedDay?(<ScoreMenu/>):(<Text></Text>)}
-        <Calendar
+        <CalendarList
         style={style}
         markedDates={this.props.markedDates}
         onDayPress={async (day)=> {
