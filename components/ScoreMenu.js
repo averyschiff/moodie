@@ -1,8 +1,8 @@
 import React from 'react'
-import {AppState, Text, View} from 'react-native';
+import {Text, View, Button} from 'react-native';
 import {connect} from 'react-redux'
 import {Menu, MenuOptions, MenuOption, MenuTrigger} from 'react-native-popup-menu'
-import {setDayData, updateDayData} from '../store/selectedDay'
+import {setDayData, updateDayData, clearDay} from '../store/selectedDay'
 import {addDay} from '../store/markedDates'
 
 const colorOptions = [
@@ -40,6 +40,9 @@ export class ScoreMenu extends React.Component{
               Set
             </Text>
           </MenuTrigger>
+          <Button 
+          onPress={()=>this.props.clear()}
+          title="Close"/>
           <MenuOptions>
             {[1,2,3,4,5].map(num=>(
               <MenuOption key={num} value={num}>
@@ -72,6 +75,7 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   setScore: (day, tracked, value) => dispatch(setDayData(day,tracked, value)),
   updateScore: (day, tracked, value) => dispatch(updateDayData(day, tracked, value)),
-  addDay: (day, color) => dispatch(addDay(day, color))
+  addDay: (day, color) => dispatch(addDay(day, color)),
+  clear: () => dispatch(clearDay())
 })
 export default connect(mapState, mapDispatch)(ScoreMenu)

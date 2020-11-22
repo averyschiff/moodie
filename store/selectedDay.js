@@ -1,6 +1,7 @@
 import * as db from '../db/db.js'
 const SET_DAY = 'SET_DAY'
 const UPDATE_VALUE = 'UPDATE_VALUE'
+const CLEAR_DAY = 'CLEAR_DAY'
 
 const setDay = (day, value) => ({
   type: SET_DAY,
@@ -11,6 +12,10 @@ const setDay = (day, value) => ({
 const updateScore = (value) => ({
   type: UPDATE_VALUE,
   value
+})
+
+export const clearDay = (value) => ({
+  type: CLEAR_DAY
 })
 
 export const fetchDayData = (day) => {
@@ -46,6 +51,8 @@ export default function(state = initDay, action){
       return {...state, date: action.day, value: action.value}
     case UPDATE_VALUE:
       return {...state, value: action.value}
+    case CLEAR_DAY:
+      return {}
     default:
       return state
   }

@@ -12,6 +12,8 @@ export default StyleSheet.create({
     marginTop: 20,
     paddingBottom: 20,
     backgroundColor: '#6993d4',
+    borderBottomEndRadius: 5,
+    borderBottomStartRadius: 5,
   },
   menuText: {
     color: 'white'
