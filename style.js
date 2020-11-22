@@ -7,4 +7,21 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  mainMenu: {
+    paddingTop: 20,
+    marginTop: 20,
+    paddingBottom: 20,
+    backgroundColor: '#6993d4',
+  },
+  menuText: {
+    color: 'white'
+  },
+  triggerText: {
+    color: 'white',
+    backgroundColor: '#888',
+    padding: 5,
+    marginTop: 10,
+    width: 35,
+    borderRadius: 10,
+  }
 });

@@ -10,13 +10,10 @@ export class MyCalendar extends React.Component{
     super(props)
   }
   render(){
-    const {style} = this.props
     return (
       <View>
-        <Text>More sample text!</Text>
-        {this.props.selectedDay?(<ScoreMenu/>):(<Text></Text>)}
+        {this.props.selectedDay?(<ScoreMenu menuStyle={this.props.myMenuStyle}/>):(<Text></Text>)}
         <CalendarList
-        style={style}
         markedDates={this.props.markedDates}
         onDayPress={async (day)=> {
           this.props.setDay(day)

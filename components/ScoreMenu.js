@@ -2,7 +2,7 @@ import React from 'react'
 import {AppState, Text, View} from 'react-native';
 import {connect} from 'react-redux'
 import {Menu, MenuOptions, MenuOption, MenuTrigger} from 'react-native-popup-menu'
-import {setDayData} from '../store/selectedDay'
+import {setDayData, updateDayData} from '../store/selectedDay'
 import {addDay} from '../store/markedDates'
 
 const colorOptions = [
@@ -18,40 +18,60 @@ export class ScoreMenu extends React.Component{
     super(props)
   }
   render(){
+    const {menuStyle} = this.props
     return (
-      <Menu onSelect={value => 
-        {
-          this.props.setScore(this.props.selectedDay, "mood", value)
-          const color = colorOptions[value-1]
-          this.props.addDay(this.props.selectedDay, color)
-        }
-      }>
-        <MenuTrigger text=
-        {this.props.active?
-          'Already done!'
-          :
-          `How was your mood (1-5) on ${this.props.selectedDay.dateString}?`
-        }
-        />
-        <MenuOptions>
-          <MenuOption value={1} text='One'/>
-          <MenuOption value={2} text='Two'/>
-          <MenuOption value={3} text='Three'/>
-          <MenuOption value={4} text='Four'/>
-          <MenuOption value={5} text='Five'/>
-        </MenuOptions>
-      </Menu>
+      <View style={menuStyle.mainMenu}>
+        <Menu onSelect={value => 
+          {
+            if (this.props.value) this.props.updateScore(this.props.selectedDay, "mood", value)
+            else this.props.setScore(this.props.selectedDay, "mood", value)
+            const color = colorOptions[value-1]
+            this.props.addDay(this.props.selectedDay, color)
+          }
+        }>
+          <Text style={menuStyle.menuText}>
+            {`How was your mood (1-5) on ${this.props.selectedDay.dateString}?`}
+          </Text>
+          <Text style={menuStyle.menuText}>
+            {`Current: ${this.props.value || '-'}`}
+          </Text>
+          <MenuTrigger>
+            <Text style={menuStyle.triggerText}>
+              Set
+            </Text>
+          </MenuTrigger>
+          <MenuOptions>
+            {[1,2,3,4,5].map(num=>(
+              <MenuOption key={num} value={num}>
+                <Text style={
+                  num==this.props.value?
+                  {
+                    backgroundColor: '#bbb',
+                    width: 15,
+                  }
+                  :
+                  {}
+                }>
+                  {num}
+                </Text>
+              </MenuOption>
+            ))}
+          </MenuOptions>
+        </Menu>
+
+      </View>
     )
   }
 }
 
 const mapState = state => ({
   selectedDay: state.day.date,
-  active: state.day.active
+  value: state.day.value
 })
 
 const mapDispatch = dispatch => ({
   setScore: (day, tracked, value) => dispatch(setDayData(day,tracked, value)),
+  updateScore: (day, tracked, value) => dispatch(updateDayData(day, tracked, value)),
   addDay: (day, color) => dispatch(addDay(day, color))
 })
 export default connect(mapState, mapDispatch)(ScoreMenu)

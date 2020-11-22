@@ -29,7 +29,7 @@ export default function App() {
     <View style={styles.container}>
       <Provider store={store}>
         <MenuProvider>
-          <Calendar db={db}
+          <Calendar db={db} myMenuStyle={styles}
           />
         </MenuProvider>
       </Provider>
