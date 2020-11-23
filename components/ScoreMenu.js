@@ -5,20 +5,13 @@ import {Menu, MenuOptions, MenuOption, MenuTrigger} from 'react-native-popup-men
 import {setDayData, updateDayData, clearDay} from '../store/selectedDay'
 import {addDay} from '../store/markedDates'
 
-const colorOptions = [
-  "rgb(225, 234, 247)",
-  "rgb(195, 212, 238)",
-  "rgb(135, 169, 221)",
-  "rgb(75, 126, 204)",
-  "rgb(15, 82, 186)",
-]
 
 export class ScoreMenu extends React.Component{
   constructor(props){
     super(props)
   }
   render(){
-    const {menuStyle} = this.props
+    const {menuStyle, colorOptions} = this.props
     return (
       <View style={menuStyle.mainMenu}>
         <Menu onSelect={value => 
@@ -35,25 +28,32 @@ export class ScoreMenu extends React.Component{
           <Text style={menuStyle.menuText}>
             {`Current: ${this.props.value || '-'}`}
           </Text>
-          <MenuTrigger>
+          <MenuTrigger style={{'alignContent': 'center'}}>
             <Text style={menuStyle.triggerText}>
-              Set
+              SET
             </Text>
           </MenuTrigger>
           <Button 
           onPress={()=>this.props.clear()}
-          title="Close"/>
+          title="Close"
+          color='#8e5576'
+          />
           <MenuOptions>
             {[1,2,3,4,5].map(num=>(
               <MenuOption key={num} value={num}>
                 <Text style={
                   num==this.props.value?
                   {
-                    backgroundColor: '#bbb',
-                    width: 15,
+                    borderStyle: 'solid',
+                    borderColor: 'black',
+                    borderWidth: 2,
+                    padding: 5,
+                    fontSize: 14
                   }
                   :
-                  {}
+                  {
+                    fontSize: 14
+                  }
                 }>
                   {num}
                 </Text>

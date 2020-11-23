@@ -16,14 +16,24 @@ export default StyleSheet.create({
     borderBottomStartRadius: 5,
   },
   menuText: {
-    color: 'white'
+    color: 'white',
+    fontSize: 16
   },
   triggerText: {
+    textAlign: 'center',
     color: 'white',
-    backgroundColor: '#888',
+    backgroundColor: '#b4c9ea',
+    height: 33,
     padding: 5,
     marginTop: 10,
-    width: 35,
-    borderRadius: 10,
+    marginBottom: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.3,
+    elevation: 9
   }
 });

@@ -35,3 +35,18 @@ export function getDayData(date, tracked, resolution){
     }
   )
 }
+
+export function getAllDayData(tracked, resolution){
+  db.transaction(
+    tx => {
+      tx.executeSql(
+        "select day, value from trackPoints where tracked=?",
+        [tracked],
+        resolution,
+        (_, {err}) => {
+          alert('There was an error!')
+        }
+      )
+    }
+  )
+}

@@ -14,7 +14,7 @@ export default function App() {
 
   React.useEffect(()=>{
 
-    db.transaction(tx => { tx.executeSql( "delete from trackPoints") })
+    //db.transaction(tx => { tx.executeSql( "delete from trackPoints") })
 
     db.transaction(tx => {
       tx.executeSql(
